@@ -11,7 +11,6 @@
   #include "S4GPS.h"
   #include "Wire.h"
   #include <SoftwareSerial.h>
-  
   #define microRX 5
   #define microTX 4
   #define buadRate 9600
@@ -19,22 +18,23 @@
   #define BUFFSIZE 90
   
   S4GPS S4GPS;  
-  
+
   bool WiFiIsOn = true; // used to turn on or off the WiFi connection
   
   char gps[BUFFSIZE];
   String sensorData;
   
   SoftwareSerial microSerial = SoftwareSerial(microRX, microTX); 
-  
+  char* deviceName;
 
 
   
   S4::S4()
   {   
   }
-  void S4::begin(String DeviceName, char* RouterName)
+  void S4::begin(char* DeviceName, char* RouterName)
   {
+       deviceName = DeviceName;
        WDTCSR |= (1 << WDCE) | (1 << WDE);
        WDTCSR = 0;
        microSerial.begin(buadRate);  // this had to be before the gps
@@ -46,7 +46,7 @@
        if(WiFiIsOn)
        {
            WiFly.begin();                // start the WiFly process
-           WiFly.join(RouterName); // connect to the router
+           join(RouterName); // connect to the router
            WiFiHankshake(DeviceName);    // connect to the server
        }
       
@@ -54,10 +54,12 @@
        
        
        sensorData = "<sensor>";
+       sensorData += deviceName;
+       sensorData += ",";
        Serial.println("Starting");
   }
   
-  bool S4::WiFiHankshake(String DeviceName)
+  bool S4::WiFiHankshake(char* DeviceName)
   {
        
        boolean start = false;
@@ -115,29 +117,37 @@
       int command;
       if(S4GPS.getGPS(gps))
       {   
+          sensorData += "</sensor>";
+         
+         
           Serial.print("<gps>");
+          Serial.print(deviceName);
+          Serial.print(",");  
           Serial.print(gps);
           Serial.println("</gps>");
-          
-          sensorData += "</sensor>";
           Serial.println(sensorData);
           
           
           microSerial.print("<gps>");
+          microSerial.print(deviceName);
+          microSerial.print(",");
           microSerial.print(gps);
-          microSerial.print("</gps>");
-          
-          microSerial.print(sensorData);
+          microSerial.println("</gps>");
+          microSerial.println(sensorData);
           
           if(WiFiIsOn)
           {
-              SpiSerial.print("<gps>");      
+              SpiSerial.print("<gps>");
+              SpiSerial.print(deviceName);
+              SpiSerial.print(",");  
               SpiSerial.print(gps);
-              SpiSerial.print("</gps>");
-              SpiSerial.print(sensorData);
+              SpiSerial.println("</gps>");
+              SpiSerial.println(sensorData);
+              
               command = getIncommingMessage(); 
           }
           sensorData = "<sensor>";
+          sensorData += deviceName;
           wait = false;
       }
       return wait;
@@ -194,3 +204,23 @@
   {
       WiFiIsOn = statement;
   }
+ void S4::join(const char* ssid)
+   {   
+       WiFly.uart.begin();
+       WiFly.reboot(); // Reboot to get device into known state
+       
+       WiFly.enterCommandMode();
+       Serial.print("joining ");
+       Serial.println(ssid);
+   // sendCommand("join DeviceTesting \r",true);
+       WiFly.sendCommand("join ",true,"");
+       WiFly.sendCommand(ssid,true,"");
+       WiFly.sendCommand("\r",true,"");
+       Serial.println("assocated");
+    
+       WiFly.sendCommand("open \r",true,"");
+       WiFly.uart.println();
+    
+    
+      delay(100);                   
+   }

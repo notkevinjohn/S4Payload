@@ -17,8 +17,8 @@
   {
         public:
                S4();
-               void begin(String DeviceName, char* RouterName);
-               bool WiFiHankshake(String DeviceName);
+               void begin(char* DeviceName, char* RouterName);
+               bool WiFiHankshake(char* DeviceName);
                bool writeData();
                int getCommand();
                int getIncommingMessage();
@@ -28,7 +28,7 @@
                void addData(char* key, char* value);
                void addData(char* key, long value);
                void addData(char* key, unsigned int value);
-               
+               void join(const char* ssid);
         private:
                 
   };

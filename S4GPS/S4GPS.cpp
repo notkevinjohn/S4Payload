@@ -90,7 +90,7 @@
        buffer[bufferidx] = c;
        if (c == '\n') 
        {
-         buffer[bufferidx] = '\0'; // delete end line
+         buffer[bufferidx-1] = '\0'; // delete end line
          buffer[bufferidx+1] = 0; // terminate it
          
          if (buffer[bufferidx-4] != '*') 
