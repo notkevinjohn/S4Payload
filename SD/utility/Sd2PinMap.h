@@ -166,6 +166,7 @@ static const pin_map_t digitalPinMap[] = {
 };
 //------------------------------------------------------------------------------
 #elif defined(__AVR_ATmega32U4__)
+<<<<<<< HEAD
 // Leonardo
 
 // Two Wire (aka I2C) ports
@@ -203,6 +204,46 @@ static const pin_map_t digitalPinMap[] = {
   {&DDRF, &PINF, &PORTF, 4},  // F4 21
   {&DDRF, &PINF, &PORTF, 1},  // F1 22
   {&DDRF, &PINF, &PORTF, 0},  // F0 23
+=======
+// Teensy 2.0
+
+// Two Wire (aka I2C) ports
+uint8_t const SDA_PIN = 6;
+uint8_t const SCL_PIN = 5;
+
+// SPI port
+uint8_t const SS_PIN = 0;
+uint8_t const MOSI_PIN = 2;
+uint8_t const MISO_PIN = 3;
+uint8_t const SCK_PIN = 1;
+
+static const pin_map_t digitalPinMap[] = {
+  {&DDRB, &PINB, &PORTB, 0},  // B0  0
+  {&DDRB, &PINB, &PORTB, 1},  // B1  1
+  {&DDRB, &PINB, &PORTB, 2},  // B2  2
+  {&DDRB, &PINB, &PORTB, 3},  // B3  3
+  {&DDRB, &PINB, &PORTB, 7},  // B7  4
+  {&DDRD, &PIND, &PORTD, 0},  // D0  5
+  {&DDRD, &PIND, &PORTD, 1},  // D1  6
+  {&DDRD, &PIND, &PORTD, 2},  // D2  7
+  {&DDRD, &PIND, &PORTD, 3},  // D3  8
+  {&DDRC, &PINC, &PORTC, 6},  // C6  9
+  {&DDRC, &PINC, &PORTC, 7},  // C7 10
+  {&DDRD, &PIND, &PORTD, 6},  // D6 11
+  {&DDRD, &PIND, &PORTD, 7},  // D7 12
+  {&DDRB, &PINB, &PORTB, 4},  // B4 13
+  {&DDRB, &PINB, &PORTB, 5},  // B5 14
+  {&DDRB, &PINB, &PORTB, 6},  // B6 15
+  {&DDRF, &PINF, &PORTF, 7},  // F7 16
+  {&DDRF, &PINF, &PORTF, 6},  // F6 17
+  {&DDRF, &PINF, &PORTF, 5},  // F5 18
+  {&DDRF, &PINF, &PORTF, 4},  // F4 19
+  {&DDRF, &PINF, &PORTF, 1},  // F1 20
+  {&DDRF, &PINF, &PORTF, 0},  // F0 21
+  {&DDRD, &PIND, &PORTD, 4},  // D4 22
+  {&DDRD, &PIND, &PORTD, 5},  // D5 23
+  {&DDRE, &PINE, &PORTE, 6}   // E6 24
+>>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
 };
 //------------------------------------------------------------------------------
 #elif defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__)

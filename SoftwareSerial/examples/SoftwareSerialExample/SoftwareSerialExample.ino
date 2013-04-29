@@ -5,6 +5,7 @@
  Receives from software serial, sends to hardware serial.
  
  The circuit: 
+<<<<<<< HEAD
  * RX is digital pin 10 (connect to TX of other device)
  * TX is digital pin 11 (connect to RX of other device)
  
@@ -19,6 +20,13 @@
  
  created back in the mists of time
  modified 25 May 2012
+=======
+ * RX is digital pin 2 (connect to TX of other device)
+ * TX is digital pin 3 (connect to RX of other device)
+ 
+ created back in the mists of time
+ modified 9 Apr 2012
+>>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
  by Tom Igoe
  based on Mikal Hart's example
  
@@ -27,6 +35,7 @@
  */
 #include <SoftwareSerial.h>
 
+<<<<<<< HEAD
 SoftwareSerial mySerial(10, 11); // RX, TX
 
 void setup()  
@@ -38,6 +47,19 @@ void setup()
   }
 
 
+=======
+SoftwareSerial mySerial(2, 3); // RX, TX
+
+void setup()  
+{
+ // Open serial communications and wait for port to open:
+  Serial.begin(57600);
+   while (!Serial) {
+    ; // wait for serial port to connect. Needed for Leonardo only
+  }
+
+  
+>>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
   Serial.println("Goodnight moon!");
 
   // set the data rate for the SoftwareSerial port
@@ -52,4 +74,7 @@ void loop() // run over and over
   if (Serial.available())
     mySerial.write(Serial.read());
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5

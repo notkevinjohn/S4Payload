@@ -63,7 +63,11 @@ void loop() {
           // send a standard http response header
           client.println("HTTP/1.1 200 OK");
           client.println("Content-Type: text/html");
+<<<<<<< HEAD
           client.println("Connection: close");
+=======
+          client.println("Connnection: close");
+>>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
           client.println();
           client.println("<!DOCTYPE HTML>");
           client.println("<html>");

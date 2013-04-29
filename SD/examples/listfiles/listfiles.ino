@@ -76,7 +76,10 @@ void printDirectory(File dir, int numTabs) {
        Serial.print("\t\t");
        Serial.println(entry.size(), DEC);
      }
+<<<<<<< HEAD
      entry.close();
+=======
+>>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
    }
 }
 
