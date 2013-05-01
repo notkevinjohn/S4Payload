@@ -126,16 +126,6 @@
        WiFly.sendCommand("\r",true,"AOK");    
       delay(100);                  
    }
-<<<<<<< HEAD
-   void S4WiFiSetup::setBrodcastPort(const char* port)
-   {
-       WiFly.sendCommand("set broadcast port ",true,"");
-       WiFly.sendCommand(port,true,"");
-       WiFly.sendCommand("\r",true,"AOK");    
-      delay(100);                  
-   }
-=======
->>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
    void S4WiFiSetup::setBordcastInterval(const char* seconds)
    {
        WiFly.sendCommand("set broadcast interval ",true,"");

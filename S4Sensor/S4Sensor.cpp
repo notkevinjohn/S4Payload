@@ -13,31 +13,14 @@
   #include "SoftwareSerial.h"
   #include "BMP085.h"
   #include "ADXL345.h"
-<<<<<<< HEAD
-  #include "HIH6310.h"
   #include "HMC5883L.h"
+  #include "HIH6310.h"
   #include "S4Accelerometer.h"
-
-  BMP085 presSen = BMP085(); 
+  BMP085 presSen = BMP085(); // Barometric Sensor Stuff
   HIH6310 hum = HIH6310();
   HMC5883L mag = HMC5883L();
-  S4Accelerometer accel = S4Accelerometer();
-=======
-  
-  
-  BMP085 presSen = BMP085(); // Barometric Sensor Stuff
- // long Temperature = 0;
- // long Pressure = 0;
-  
-  #define addressHum 0x27// Humidity Stuff
-  byte _status; 
-  unsigned int H_dat, T_dat;
-  float RH, T_C;
+  S4Accelerometer acell = S4Accelerometer();
 
-  #define addressMag  0x1E // Magnatometer Stuff
-  
-  ADXL345 adxl;
->>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
   
   S4Sensor::S4Sensor()
   {   
@@ -58,13 +41,13 @@
   }
   void S4Sensor::startHumidity()
   {
+       
   }
   
   byte S4Sensor::getHumidity(double &humidity, double &temperature)
   {
-<<<<<<< HEAD
-    return hum.getHumidity(humidity, temperature);
-=======
+       hum.getHumidity(humidity, temperature);
+       /*
       byte address, Hum_H, Hum_L, Temp_H, Temp_L, _status;
       unsigned int H_dat, T_dat;
       
@@ -88,29 +71,16 @@
       humidity = (double) H_dat * 6.10e-3;
       temperature = (double)T_dat *1.007e-2-40.0;
       return(_status);
->>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
+      */
   }
 
   void S4Sensor::startAccelerometer()
   {
-<<<<<<< HEAD
-       accel.init(1,1,1,10,255);
-  }
-  void S4Sensor::getAccelerometer(double &accelX, double &accelY, double &accelZ)
-  {
-       accel.getAccel(accelX,accelY,accelZ);
-  }
-  void S4Sensor::startMagnetometer()
-  {    
-      mag.init();
-  }
-  void S4Sensor::getMagnetometer(int &magX, int &magY, int &magZ)
-  {
-       mag.getMagnetometer(magX,magY,magZ);
-=======
+       acell.init(1,1, 1, 10, 255);
+       /*
 
       
-      /******setup accel **********/
+
       adxl.powerOn();
       adxl.setActivityThreshold(1); //62.5mg per increment
       adxl.setInactivityThreshold(10); //62.5mg per increment
@@ -125,26 +95,34 @@
       adxl.setInactivityX(1);
       adxl.setInactivityY(1);
       adxl.setInactivityZ(1);
-  
+  */
   }
   void S4Sensor::getAccelerometer(double &accelX, double &accelY, double &accelZ)
   {
+       acell.getAccel(accelX,accelY,accelZ);
+       /*
        int intAccelX, intAccelY, intAccelZ;
        adxl.readAccel(&intAccelX, &intAccelY, &intAccelZ);
        accelX = (double)intAccelX/255.0;
        accelY = (double)intAccelY/255.0;
        accelZ = (double)intAccelZ/255.0;
+       */
        
   }
   void S4Sensor::startMagnetometer()
   {    
+       mag.init();
+       /*
       Wire.beginTransmission(addressMag); //open communication with HMC5883
       Wire.write(0x02); //select mode register
       Wire.write(0x00); //continuous measurement mode
       Wire.endTransmission();
+      */
   }
   void S4Sensor::getMagnetometer(int &x, int &y, int &z)
   {
+       mag.getMagnetometer(x,y,z);
+       /*
       Wire.beginTransmission(addressMag);
       Wire.write(0x03); //select register 3, X MSB register
       Wire.endTransmission();
@@ -159,5 +137,5 @@
           y = Wire.read()<<8; //Y msb
           y |= Wire.read(); //Y lsb
       }
->>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
+      */
   }

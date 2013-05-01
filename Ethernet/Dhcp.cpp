@@ -43,10 +43,7 @@ int DhcpClass::request_DHCP_lease(){
     _dhcpTransactionId = random(1UL, 2000UL);
     _dhcpInitialTransactionId = _dhcpTransactionId;
 
-<<<<<<< HEAD
     _dhcpUdpSocket.stop();
-=======
->>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
     if (_dhcpUdpSocket.begin(DHCP_CLIENT_PORT) == 0)
     {
       // Couldn't get a socket

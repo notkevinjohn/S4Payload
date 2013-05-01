@@ -29,10 +29,6 @@
                void setHostAdderss(const char* hostAddress);
                void setBrodcastAddress(const char* brodcastAddress);
                void setBordcastInterval(const char* seconds);
-<<<<<<< HEAD
-               void setBrodcastPort(const char* port);
-=======
->>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
                void setExternalAntenna(const char* isExtAnt);
                void setFlushSize(const char* size);
                void setProto(const char* proto);

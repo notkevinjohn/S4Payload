@@ -14,7 +14,6 @@
 SPIClass SPI;
 
 void SPIClass::begin() {
-<<<<<<< HEAD
 
   // Set SS to high so a connected chip will be "deselected" by default
   digitalWrite(SS, HIGH);
@@ -41,29 +40,6 @@ void SPIClass::begin() {
 }
 
 
-=======
-  // Set direction register for SCK and MOSI pin.
-  // MISO pin automatically overrides to INPUT.
-  // When the SS pin is set as OUTPUT, it can be used as
-  // a general purpose output port (it doesn't influence
-  // SPI operations).
-
-  pinMode(SCK, OUTPUT);
-  pinMode(MOSI, OUTPUT);
-  pinMode(SS, OUTPUT);
-  
-  digitalWrite(SCK, LOW);
-  digitalWrite(MOSI, LOW);
-  digitalWrite(SS, HIGH);
-
-  // Warning: if the SS pin ever becomes a LOW INPUT then SPI 
-  // automatically switches to Slave, so the data direction of 
-  // the SS pin MUST be kept as OUTPUT.
-  SPCR |= _BV(MSTR);
-  SPCR |= _BV(SPE);
-}
-
->>>>>>> 3ae414efdf9986d774e4b52899e16d517ff3f5f5
 void SPIClass::end() {
   SPCR &= ~_BV(SPE);
 }
